@@ -10,19 +10,26 @@ public class Declaration extends Statement {
 	public String Type;
 	public String Name;
 	
-	public static List<String> findDeclaration(String code) {
+	public Declaration(String code) {
 		
-	    Matcher m = Pattern.compile("(int|String) .*=.*;").matcher(code);
+		StatementText=code;
+	}
+
+	public static List<Declaration> findDeclaration(String code) {
+		
+		
+	    Matcher m = Pattern.compile("(.*) .*=.*;").matcher(code);
 	    
-	    List<String> declerations=new ArrayList<String>();
+	    List<Declaration> declerations=new ArrayList<Declaration>();
 	    
 	    while (m.find()) {
-	    	declerations.add(m.group());
-
+	    	declerations.add(new Declaration(m.group()));
 	    }
 		return declerations;
 
 	}
 	
-
+	public String toString() {
+		return StatementText;
+	}
 }
